@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Feed and biofuels - ALLFED Integrated Model</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Feed and biofuels";
+    var mkdocs_page_input_path = "modules/src/food_system/feed_and_biofuels.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> ALLFED Integrated Model</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../..">ALLFED Integrated Food System Model</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Modules</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Src</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Food system</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../calculate_animals_and_feed_over_time/">Calculate animals and feed over time</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../cellulosic_sugar/">Cellulosic sugar</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">Feed and biofuels</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#feedandbiofuels">FeedAndBiofuels</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../food/">Food</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../greenhouses/">Greenhouses</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../meat_and_dairy/">Meat and dairy</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../methane_scp/">Methane scp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../outdoor_crops/">Outdoor crops</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../seafood/">Seafood</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../seaweed/">Seaweed</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../stored_food/">Stored food</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../unit_conversions/">Unit conversions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="#">Import scripts no food trade</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../import_scripts_no_food_trade/create_crop_macros_csv/">Create crop macros csv</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../import_scripts_no_food_trade/create_nuclear_winter_csv/">Create nuclear winter csv</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="#">Optimizer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../optimizer/extract_results/">Extract results</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../optimizer/interpret_results/">Interpret results</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../optimizer/optimizer/">Optimizer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../optimizer/parameters/">Parameters</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../optimizer/validate_results/">Validate results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="#">Scenarios</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/create_figure_1ab/">Create figure 1ab</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/create_figure_2abcde/">Create figure 2abcde</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/create_figure_3abcd/">Create figure 3abcd</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/run_USA_with_improved_numbers/">run USA with improved numbers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/run_model_baseline/">Run model baseline</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/run_model_no_resilient_foods/">Run model no resilient foods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/run_model_no_trade/">Run model no trade</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/run_model_with_resilient_foods/">Run model with resilient foods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/run_scenario/">Run scenario</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../scenarios/scenarios/">Scenarios</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="#">Utilities</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../utilities/import_utilities/">Import utilities</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utilities/make_powerpoint/">Make powerpoint</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utilities/plotter/">Plotter</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utilities/print_parameters/">Print parameters</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">ALLFED Integrated Model</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Modules &raquo;</li>
+        
+      
+        
+          <li>Src &raquo;</li>
+        
+      
+        
+          <li>Food system &raquo;</li>
+        
+      
+    
+    <li>Feed and biofuels</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1"></h1>
+<h2 id="feedandbiofuels">FeedAndBiofuels</h2>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L19">source</a></p>
+<pre><code class="language-python">FeedAndBiofuels(
+   constants_for_params
+)
+</code></pre>
+<p><strong>Methods:</strong></p>
+<h3 id="set_nonhuman_consumption_with_cap">.set_nonhuman_consumption_with_cap</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L45">source</a></p>
+<pre><code class="language-python">.set_nonhuman_consumption_with_cap(
+   constants_for_params, outdoor_crops, stored_food,
+   biofuels_before_cap_prewaste, feed_before_cap_prewaste, excess_feed_prewaste
+)
+</code></pre>
+<hr />
+<h1 id="note-this-function-depends-on-get_excess-being-run-first">NOTE: This function depends on get_excess being run first!</h1>
+<p>Cap biofuel usage to the amount of food available (stored food
+plus outdoor crops)</p>
+<p>This takes all the outdoor growing in each month in which feed and biofuel would
+be used. First, the amount of food from the outdoor crops is subtracted from the
+net feed plus biofuel previously assigned to be used.</p>
+<p>If kcals, fat, and
+protein used by biofuels plus feed is always less than outdoor growing, then
+nothing is changed and the program returns.</p>
+<p>If kcals, fat, and
+protein used by biofuels plus feed is greater in any of the months than outdoor
+growing, then the sum of all of these exceedances from what is grown is summed.
+If the sum of exceedances is greater than any of the macronutrients summed from
+stored food, then the amount of biofuels is reduced such that the sum of
+exceedances uses exactly as much stored food is available.</p>
+<p>However, if there was an excess feed assigned in the EXCESS_FEED variable,
+then this implies that a diet calculation is being run, in order to reduce the
+calories per person per day to 2100. This should NEVER be run in the context of
+feed and biofuels exceeding available outdoor growing and stored food, because
+in that case there would not be nearly enough calories to go around. Therefore,
+the program will raise an error if this occurs.</p>
+<p>If the biofuels are reduced to zero, then the remaining exceedance is subtracted
+from the feed usage until exceedances use exactly as much stored food is
+available.</p>
+<p>In the case that the stored food is zero, this means that biofuels plus feed
+will be capped to the outdoor production of any macronutrient in any month.</p>
+<h3 id="get_biofuels_and_feed_before_waste_from_delayed_shutoff">.get_biofuels_and_feed_before_waste_from_delayed_shutoff</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L115">source</a></p>
+<pre><code class="language-python">.get_biofuels_and_feed_before_waste_from_delayed_shutoff(
+   constants_for_params
+)
+</code></pre>
+<h3 id="get_biofuels_and_feed_before_waste_from_animal_pops">.get_biofuels_and_feed_before_waste_from_animal_pops</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L141">source</a></p>
+<pre><code class="language-python">.get_biofuels_and_feed_before_waste_from_animal_pops(
+   constants_for_params, feed_over_time
+)
+</code></pre>
+<h3 id="set_biofuels_and_feed_usage_postwaste">.set_biofuels_and_feed_usage_postwaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L186">source</a></p>
+<pre><code class="language-python">.set_biofuels_and_feed_usage_postwaste(
+   max_net_demand, stored_food, outdoor_crops, biofuels_before_cap,
+   feed_before_cap, excess_feed_prewaste
+)
+</code></pre>
+<h3 id="iteratively_determine_reduction_in_nonhuman_consumption_postwaste">.iteratively_determine_reduction_in_nonhuman_consumption_postwaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L249">source</a></p>
+<pre><code class="language-python">.iteratively_determine_reduction_in_nonhuman_consumption_postwaste(
+   stored_food, outdoor_crops, biofuels_before_cap, feed_before_cap
+)
+</code></pre>
+<hr />
+<p>This function iteratively determines the amount of nonhuman consumption by
+reducing the amount of biofuels and feed used.</p>
+<h3 id="get_biofuel_usage_before_cap_prewaste">.get_biofuel_usage_before_cap_prewaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L299">source</a></p>
+<pre><code class="language-python">.get_biofuel_usage_before_cap_prewaste(
+   biofuel_duration
+)
+</code></pre>
+<hr />
+<p>This function is used to get the biofuel usage before the cap is applied.
+The total number of months before shutoff is the duration, representing the
+number of nonzero biofuel months for biofuels to be used.</p>
+<p>pre waste: this is the actual amount used of stored food and crops before waste
+is applied to crops and stored food</p>
+<h3 id="get_feed_usage_before_cap_prewaste">.get_feed_usage_before_cap_prewaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L353">source</a></p>
+<pre><code class="language-python">.get_feed_usage_before_cap_prewaste(
+   feed_duration, excess_feed_prewaste
+)
+</code></pre>
+<hr />
+<p>This function is used to get the feed usage before the cap is applied.
+The total number of months before shutoff is the duration, representing the
+number of nonzero feed months for feeds to be used.</p>
+<h3 id="get_nonhuman_consumption_before_cap_prewaste">.get_nonhuman_consumption_before_cap_prewaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L401">source</a></p>
+<pre><code class="language-python">.get_nonhuman_consumption_before_cap_prewaste(
+   biofuels_before_cap_prewaste, feed_before_cap_prewaste
+)
+</code></pre>
+<hr />
+<p>Calculate and set the total usage for consumption of biofuels and feed</p>
+<h3 id="get_nonhuman_consumption_with_cap_postwaste">.get_nonhuman_consumption_with_cap_postwaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L419">source</a></p>
+<pre><code class="language-python">.get_nonhuman_consumption_with_cap_postwaste(
+   constants_for_params, biofuels, feed
+)
+</code></pre>
+<hr />
+<p>Calculate and set the total usage for consumption of biofuels and feed</p>
+<p>assume animals need and use human levels of fat and protein per kcal</p>
+<h3 id="calculate_max_running_net_demand_postwaste">.calculate_max_running_net_demand_postwaste</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L431">source</a></p>
+<pre><code class="language-python">.calculate_max_running_net_demand_postwaste(
+   outdoor_crops, biofuels_before_cap, feed_before_cap
+)
+</code></pre>
+<hr />
+<p>Calculate the exceedance of the biofuel and feed usage past the outdoor
+outdoor_crops
+production on a monthly basis for each nutrient.</p>
+<p>NOTE:
+UPDATE
+I realized that the max amount of stored food or OG used each month by
+kcals, fat or protein needs to be summed, rather than the max of each
+individual nutrient</p>
+<p><strong>Example</strong></p>
+<ul>
+<li><strong>kcals</strong>  :   10, 20, 10, 10
+    fat:     10, 30, 20, 20
+    protein: 10, 30, 20, 20
+    month:    1   2   3   4</li>
+<li><strong>kcals</strong>  :    5, 20, 10, 15
+    fat:      5, 15, 25, 20
+    protein: 25, 15, 20, 20
+    month:    1   2   3   4</li>
+<li><strong>kcals</strong>  :    5,  0,  0, -5
+    fat:      5, 15, -5,  0
+    protein:-15, 15,  0,  0
+    month:    1   2   3   4</li>
+<li><strong>kcals</strong>  :    5,  5,  5,  0
+    fat:      5, 20, 15, 15
+    protein:-15,  0,  0,  0
+    month:    1   2   3   4</li>
+<li><strong>kcals</strong>  :    0
+    fat:      5
+    protein:-15
+    month: allmonths</li>
+<li><strong>kcals</strong>  :    0
+    fat:      -5
+    protein: 15
+    month: allmonths
+outdoor crops:</li>
+</ul>
+<p>nonhuman_consumption:</p>
+<p>supply_minus_demand:</p>
+<p>running_net_supply:</p>
+<p>min_running_net_supply:</p>
+<p>max_running_net_demand:</p>
+<p>For all month combined, how much original stored food is needed to make up
+for each macronutrient?</p>
+<hr />
+<p>Answer:
+    We sum up all the discrepancies between supply and demand.
+    The stored food will need to make up for the minimum total shortage added
+    up.</p>
+<h3 id="get_excess_food_usage_from_percents">.get_excess_food_usage_from_percents</h3>
+<p><a href="https://github.com/allfed/allfed-integrated-model/blob/master/src/food_system/feed_and_biofuels.py/#L535">source</a></p>
+<pre><code class="language-python">.get_excess_food_usage_from_percents(
+   excess_feed_percent
+)
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../food/" class="btn btn-neutral float-right" title="Food">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cellulosic_sugar/" class="btn btn-neutral" title="Cellulosic sugar"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Me</p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../cellulosic_sugar/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../food/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme_extra.js" defer></script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
