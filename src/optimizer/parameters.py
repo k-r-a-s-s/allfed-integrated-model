@@ -51,7 +51,7 @@ class Parameters:
         ):
             assert (
                 constants_inputs["ADD_MAINTAINED_MEAT"] is True
-            ), "Maintained meat needs to be added for continued feed usage"
+            ), "Maintained meat needs to be added for continued feed  ge"
 
         assert self.FIRST_TIME_RUN
         self.FIRST_TIME_RUN = False
@@ -501,13 +501,8 @@ class Parameters:
             reduction_in_dairy_calves = 100
             use_grass_and_residues_for_dairy = False
 
-
-        ## PUT INPUT DATA HER FOR NOW
-
-        country_code = "USA"
-
         input_dict = {
-            "country_code": country_code,
+            "country_code": constants_inputs["ISO3"],
             "reduction_in_beef_calves": 90,
             "reduction_in_dairy_calves": 30,
             "increase_in_slaughter": 110,
@@ -517,7 +512,6 @@ class Parameters:
             "discount_rate": 30,
             "mother_slaughter": 50,
             "use_grass_and_residues_for_dairy": True,
-            "tons_to_kcals": 3455000.0,
             "keep_dairy": 0
         }
 
@@ -547,6 +541,12 @@ class Parameters:
             feed_dairy_meat_results["Pig Slaughtered"],
             feed_dairy_meat_results["Poultry Slaughtered"],
         )
+
+
+        # print all keys and values in feed_dairy_meat_results
+        for key, value in feed_dairy_meat_results.items():
+            print(key, value)
+
 
         # https://www.nass.usda.gov/Charts_and_Maps/Milk_Production_and_Milk_Cows/cowrates.php
         monthly_milk_tons = (

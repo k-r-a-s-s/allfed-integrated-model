@@ -124,6 +124,18 @@ class CalculateAnimalOutputs:
             "medium_animals": country_specific_feed_per_medium_animal_head_pm,
             "large_animals": country_specific_feed_per_large_animal_head_pm,
             "dairy_cows": country_specific_feed_per_dairy_cow_head_pm,
+            "small_animals_fractional_caloric": fractional_caloric * country_specific_feed_per_small_animal_head_pm,
+            "small_animals_fractional_fat": fractional_fat * country_specific_feed_per_small_animal_head_pm,
+            "small_animals_fractional_protein": fractional_protein * country_specific_feed_per_small_animal_head_pm,
+            "medium_animals_fractional_caloric": fractional_caloric * country_specific_feed_per_medium_animal_head_pm,
+            "medium_animals_fractional_fat": fractional_fat * country_specific_feed_per_medium_animal_head_pm,
+            "medium_animals_fractional_protein": fractional_protein * country_specific_feed_per_medium_animal_head_pm,
+            "large_animals_fractional_caloric": fractional_caloric * country_specific_feed_per_large_animal_head_pm,
+            "large_animals_fractional_fat": fractional_fat * country_specific_feed_per_large_animal_head_pm,
+            "large_animals_fractional_protein": fractional_protein * country_specific_feed_per_large_animal_head_pm,
+            "dairy_cows_fractional_caloric": fractional_caloric * country_specific_feed_per_dairy_cow_head_pm,
+            "dairy_cows_fractional_fat": fractional_fat * country_specific_feed_per_dairy_cow_head_pm,
+            "dairy_cows_fractional_protein": fractional_protein * country_specific_feed_per_dairy_cow_head_pm,
         }
 
         return country_specific_feed_per_animal_head_pm
@@ -203,13 +215,10 @@ class CalculateAnimalOutputs:
         will be used on pregnant animals.)
 
         use_grass_and_residues_for_dairy: Whether to Use Residues for Dairy
-
-        tons_to_kcals: calories per ton of feed
-
         """
 
         #unpack input dict
-        country_code, reduction_in_beef_calves, reduction_in_dairy_calves, increase_in_slaughter, reduction_in_pig_breeding, reduction_in_poultry_breeding, months, discount_rate, mother_slaughter, use_grass_and_residues_for_dairy, tons_to_kcals, keep_dairy = data.values()
+        country_code, reduction_in_beef_calves, reduction_in_dairy_calves, increase_in_slaughter, reduction_in_pig_breeding, reduction_in_poultry_breeding, months, discount_rate, mother_slaughter, use_grass_and_residues_for_dairy, keep_dairy = data.values()
 
         steady_state_births = 1
 
@@ -523,6 +532,7 @@ Start main script
 # Import CSV to dataframes
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath(".").resolve()
+
 df_animals = pd.read_csv(
     DATA_PATH.joinpath("InputDataAndSources.csv"), index_col="Variable"
 )
@@ -532,93 +542,7 @@ df_feed_country = pd.read_csv(
 df_fao_animals = pd.read_csv(DATA_PATH.joinpath("head_count_csv.csv"), index_col="iso3")
 df_fao_slaughter = pd.read_csv(DATA_PATH.joinpath("FAO_stat_slaughter_counts_processed.csv"), index_col="iso3")
 
-# tons_to_kcals_first_try = (
-#     (3560 + 3350) / 2 * 1000
-# )  # convert tons to kcals (ASSUME CALORIC DENSITY IS HALF MAIZE, HALF SOYBEAN)
-
-
 # ## Create class instance
 ao = CalculateAnimalOutputs()
 
-#### Create loop here OR create a function that takes a list of countries and runs the model for each
-# temporary manual select of country:
-country_code = "SDN" # <----- TEMPP, replace with function/loop
-
-## Create Dict for inputs in to functions
-input_dict = {
-    "country_code": country_code,
-    "reduction_in_beef_calves": 90,
-    "reduction_in_dairy_calves": 30,
-    "increase_in_slaughter": 110,
-    "reduction_in_pig_breeding": 90,
-    "reduction_in_poultry_breeding": 90,
-    "months": 120,
-    "discount_rate": 30,
-    "mother_slaughter": 50,
-    "use_grass_and_residues_for_dairy": True,
-    "tons_to_kcals": 3455000.0,
-    "keep_dairy": 0
-}
-
-# #### Do all the modelling
-# output_df = ao.calculate_feed_and_animals(
-#     input_dict
-# )
-
-#### Finish modelling. 
-# consider method of stroing dataframes from output.
-
-
-######################################
-#### Change to seperate file soon ####
-# ## Plotting wiht plotyl
-# import plotly.express as px
-
-# #use plotly to plot species populations'
-# fig = px.line(output_df, x="Month", y=["Poultry Pop", "Pigs Pop", "Beef Pop", "Dairy Pop"], title="Species Populations")
-# fig.update_layout(title_text="Species Populations " + country_code)
-# fig.show()
-
-# # plotly to plot species slaughter
-# fig = px.line(output_df, x="Month", y=["Poultry Slaughtered", "Pig Slaughtered", "Beef Slaughtered", "Dairy Slaughtered"], title="Species Slaughtered")
-# fig.update_layout(title_text="Species Slaughtered "+ country_code)
-# fig.show()
-
-# #plotly to plot species feed
-# fig = px.line(output_df, x="Month", y=["Poultry Feed", "Pig Feed", "Beef Feed", "Dairy Feed"], title="Species Feed")
-# fig.update_layout(title_text="Species Feed " + country_code)
-# fig.show()
-
-
-# ## do the above plotting but with matplotlib
-# import matplotlib.pyplot as plt
-
-# fig, ax = plt.subplots()
-# ax.plot(output_df["Month"], output_df["Poultry Pop"], label="Poultry Pop")
-# ax.plot(output_df["Month"], output_df["Pigs Pop"], label="Pigs Pop")
-# ax.plot(output_df["Month"], output_df["Beef Pop"], label="Beef Pop")
-# ax.plot(output_df["Month"], output_df["Dairy Pop"], label="Dairy Pop")
-# ax.set(xlabel="Month", ylabel="Population", title="Species Populations")
-# ax.legend()
-# plt.show()
-
-# fig, ax = plt.subplots()
-# ax.plot(output_df["Month"], output_df["Poultry Slaughtered"], label="Poultry Slaughtered")
-# ax.plot(output_df["Month"], output_df["Pig Slaughtered"], label="Pig Slaughtered")
-# ax.plot(output_df["Month"], output_df["Beef Slaughtered"], label="Beef Slaughtered")
-# ax.plot(output_df["Month"], output_df["Dairy Slaughtered"], label="Dairy Slaughtered")
-# ax.set(xlabel="Month", ylabel="Slaughtered", title="Species Slaughtered")
-# ax.legend()
-# plt.show()
-
-# fig, ax = plt.subplots()
-# ax.plot(output_df["Month"], output_df["Poultry Feed"], label="Poultry Feed")
-# ax.plot(output_df["Month"], output_df["Pig Feed"], label="Pig Feed")
-# ax.plot(output_df["Month"], output_df["Beef Feed"], label="Beef Feed")    
-# ax.plot(output_df["Month"], output_df["Dairy Feed"], label="Dairy Feed")
-# ax.set(xlabel="Month", ylabel="Feed", title="Species Feed")
-# ax.legend()
-# plt.show()
-
-## Plotting
 

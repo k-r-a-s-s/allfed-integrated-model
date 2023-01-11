@@ -38,40 +38,17 @@ def run_USA_with_and_without_resilient():
         show_map_figures=True,
         add_map_slide_to_pptx=False,
         scenario_option=this_simulation,
-        countries_list=["RUS"],
-        #     "CHN",
-        #     "FRA",
-        #     "IND",
-        #     "ISR",
-        #     "PRK",
-        #     "PAK",
-        #     "RUS",
-        #     "F5707+GBR",
-        #     "USA",
-        # ],
-    )
-
-    this_simulation["waste"] = "zero"
-    this_simulation["scenario"] = "no_resilient_foods"
-
-    scenario_runner.run_model_no_trade(
-        title="Resilient foods for US only",
-        create_pptx_with_all_countries=False,
-        show_country_figures=True,
-        show_map_figures=True,
-        add_map_slide_to_pptx=False,
-        scenario_option=this_simulation,
-        countries_list=["USA"],
-        #     "CHN",
-        #     "FRA",
-        #     "IND",
-        #     "ISR",
-        #     "PRK",
-        #     "PAK",
-        #     "RUS",
-        #     "F5707+GBR",
-        #     "USA",
-        # ],
+        countries_list=[
+            "CHN",
+            # "FRA",
+            # "IND",
+            # "ISR",
+            # "PRK",
+            # "PAK",
+            # "RUS",
+            # # "F5707+GBR",
+            # "USA",
+        ],
     )
 
 

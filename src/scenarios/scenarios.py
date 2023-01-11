@@ -196,6 +196,12 @@ class Scenarios:
         # global human population (2020)
         constants_for_params["POP"] = country_data["population"]
 
+        # country code, added by Kev
+        try:
+            constants_for_params["ISO3"] = country_data["iso3"]
+        except KeyError:
+            constants_for_params["ISO3"] = "XXX"
+        
         # This should only be enabled if we're trying to reproduce the method of Xia
         # et al. (2020), they subtract feed directly from production and ignore stored
         # food usage of crops

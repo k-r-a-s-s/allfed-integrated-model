@@ -133,6 +133,7 @@ class ScenarioRunner:
             constants_for_params = scenario_loader.init_country_food_system_properties(
                 country_data
             )
+            constants_for_params["iso3"] = country_data["iso3"]
         else:
             scenario_is_correct = False
 
