@@ -124,18 +124,18 @@ class CalculateAnimalOutputs:
             "medium_animals": country_specific_feed_per_medium_animal_head_pm,
             "large_animals": country_specific_feed_per_large_animal_head_pm,
             "dairy_cows": country_specific_feed_per_dairy_cow_head_pm,
-            "small_animals_fractional_caloric": fractional_caloric * country_specific_feed_per_small_animal_head_pm,
-            "small_animals_fractional_fat": fractional_fat * country_specific_feed_per_small_animal_head_pm,
-            "small_animals_fractional_protein": fractional_protein * country_specific_feed_per_small_animal_head_pm,
-            "medium_animals_fractional_caloric": fractional_caloric * country_specific_feed_per_medium_animal_head_pm,
-            "medium_animals_fractional_fat": fractional_fat * country_specific_feed_per_medium_animal_head_pm,
-            "medium_animals_fractional_protein": fractional_protein * country_specific_feed_per_medium_animal_head_pm,
-            "large_animals_fractional_caloric": fractional_caloric * country_specific_feed_per_large_animal_head_pm,
-            "large_animals_fractional_fat": fractional_fat * country_specific_feed_per_large_animal_head_pm,
-            "large_animals_fractional_protein": fractional_protein * country_specific_feed_per_large_animal_head_pm,
-            "dairy_cows_fractional_caloric": fractional_caloric * country_specific_feed_per_dairy_cow_head_pm,
-            "dairy_cows_fractional_fat": fractional_fat * country_specific_feed_per_dairy_cow_head_pm,
-            "dairy_cows_fractional_protein": fractional_protein * country_specific_feed_per_dairy_cow_head_pm,
+            "small_animals_caloric": fractional_caloric * country_specific_feed_per_small_animal_head_pm,
+            "small_animals_fat": fractional_fat * country_specific_feed_per_small_animal_head_pm,
+            "small_animals_protein": fractional_protein * country_specific_feed_per_small_animal_head_pm,
+            "medium_animals_caloric": fractional_caloric * country_specific_feed_per_medium_animal_head_pm,
+            "medium_animals_fat": fractional_fat * country_specific_feed_per_medium_animal_head_pm,
+            "medium_animals_protein": fractional_protein * country_specific_feed_per_medium_animal_head_pm,
+            "large_animals_caloric": fractional_caloric * country_specific_feed_per_large_animal_head_pm,
+            "large_animals_fat": fractional_fat * country_specific_feed_per_large_animal_head_pm,
+            "large_animals_protein": fractional_protein * country_specific_feed_per_large_animal_head_pm,
+            "dairy_cows_caloric": fractional_caloric * country_specific_feed_per_dairy_cow_head_pm,
+            "dairy_cows_fat": fractional_fat * country_specific_feed_per_dairy_cow_head_pm,
+            "dairy_cows_protein": fractional_protein * country_specific_feed_per_dairy_cow_head_pm,
         }
 
         return country_specific_feed_per_animal_head_pm
@@ -164,23 +164,49 @@ class CalculateAnimalOutputs:
         feed_dict = self.calculate_country_specifc_per_species_feed_consumption(data["country_code"])
         df_out = self.calculate_animal_populations(data)
 
-        # combine togtehr
-        poultry_feed = df_out["Poultry Pop"] * feed_dict["small_animals"]
-        pork_feed = df_out["Pigs Pop"] * feed_dict["medium_animals"]
-        beef_feed = df_out["Beef Pop"] * feed_dict["large_animals"]
-        dairy_feed = df_out["Dairy Pop"] * feed_dict["dairy_cows"]
-
-        df_out["Poultry Feed"] = poultry_feed
-        df_out["Pig Feed"] = pork_feed
-        df_out["Beef Feed"] = beef_feed
-        df_out["Dairy Feed"] = dairy_feed
-
-        df_out["Combined Feed"] = (
-            df_out["Poultry Feed"]
-            + df_out["Pig Feed"]
-            + df_out["Beef Feed"]
-            + df_out["Dairy Feed"]
+        # now combine the two in and calculate feed usage along different dimensions
+        df_out["small_animal_total_feed"] = df_out["Poultry Pop"] * feed_dict["small_animals"]
+        df_out["medium_animal_total_feed"] = df_out["Pigs Pop"] * feed_dict["medium_animals"]
+        df_out["large_animal_total_feed"] = df_out["Beef Pop"] * feed_dict["large_animals"]
+        df_out["dairy_cow_total_feed"] = df_out["Dairy Pop"] * feed_dict["dairy_cows"]
+        df_out["small_animals_caloric"] = df_out["Poultry Pop"] * feed_dict["small_animals_caloric"]
+        df_out["small_animals_fat"] = df_out["Poultry Pop"] * feed_dict["small_animals_fat"]
+        df_out["small_animals_protein"] = df_out["Poultry Pop"] * feed_dict["small_animals_protein"]
+        df_out["medium_animals_caloric"] = df_out["Pigs Pop"] * feed_dict["medium_animals_caloric"]
+        df_out["medium_animals_fat"] = df_out["Pigs Pop"] * feed_dict["medium_animals_fat"]
+        df_out["medium_animals_protein"] = df_out["Pigs Pop"] * feed_dict["medium_animals_protein"]
+        df_out["large_animals_caloric"] = df_out["Beef Pop"] * feed_dict["large_animals_caloric"]
+        df_out["large_animals_fat"] = df_out["Beef Pop"] * feed_dict["large_animals_fat"]
+        df_out["large_animals_protein"] = df_out["Beef Pop"] * feed_dict["large_animals_protein"]
+        df_out["dairy_cows_caloric"] = df_out["Dairy Pop"] * feed_dict["dairy_cows_caloric"]
+        df_out["dairy_cows_fat"] = df_out["Dairy Pop"] * feed_dict["dairy_cows_fat"]
+        df_out["dairy_cows_protein"] = df_out["Dairy Pop"] * feed_dict["dairy_cows_protein"]
+        # totals
+        df_out["total_feed"] = (
+            df_out["small_animal_total_feed"]
+            + df_out["medium_animal_total_feed"]
+            + df_out["large_animal_total_feed"]
+            + df_out["dairy_cow_total_feed"]
         )
+        df_out["total_caloric"] = (
+            df_out["small_animals_caloric"]
+            + df_out["medium_animals_caloric"]
+            + df_out["large_animals_caloric"]
+            + df_out["dairy_cows_caloric"]
+        )
+        df_out["total_fat"] = (
+            df_out["small_animals_fat"]
+            + df_out["medium_animals_fat"]
+            + df_out["large_animals_fat"]
+            + df_out["dairy_cows_fat"]
+        )
+        df_out["total_protein"] = (
+            df_out["small_animals_protein"]
+            + df_out["medium_animals_protein"]
+            + df_out["large_animals_protein"]
+            + df_out["dairy_cows_protein"]
+        )
+
 
         return df_out
 
@@ -190,8 +216,19 @@ class CalculateAnimalOutputs:
     ):
         """
 
-        Inputs:
+        Parameters
+        ----------
+        data : dict
+            Dictionary containing the country code and the animal populations
 
+        Returns
+        -------
+        df_out : pandas.DataFrame
+            Dataframe containing the animal populations Slaughter numbers
+
+        Inputs with "data":
+
+        country_code: Country Code
         reduction_in_beef_calves: Reduction in Beef Birth Rate
         reduction_in_dairy_calves: Reduction in Dairy Birth Rate
 
@@ -207,7 +244,6 @@ class CalculateAnimalOutputs:
         months: Months to simulate
         discount_rate: discount_rate: Discount Rate for Labour/Technology Transfer
         between species
-
 
         mother_slaughter: Proportion of Slaughter which is mothers
         (In a normal slaughtering regime pregnant animals are not killed.
