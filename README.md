@@ -80,6 +80,15 @@ For both versions: Code from this project will only run smoothly when opened in 
 environment and when the working directory is set to the path location of the repository on
 your machine.
 
+#### Installing Custom Modules Via Pip
+
+Once the conda environemtn is set up AND activated, from the parent folder (allfed-integrated-model), run:
+
+```
+pip install -e .
+```
+
+Which will install the moudles contained in src.
 
 # Detailed Explanation of Files and Folders in this Repository
 

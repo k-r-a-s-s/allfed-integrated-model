@@ -501,18 +501,29 @@ class Parameters:
             reduction_in_dairy_calves = 100
             use_grass_and_residues_for_dairy = False
 
+
+        ## PUT INPUT DATA HER FOR NOW
+
+        country_code = "USA"
+
+        input_dict = {
+            "country_code": country_code,
+            "reduction_in_beef_calves": 90,
+            "reduction_in_dairy_calves": 30,
+            "increase_in_slaughter": 110,
+            "reduction_in_pig_breeding": 90,
+            "reduction_in_poultry_breeding": 90,
+            "months": 120,
+            "discount_rate": 30,
+            "mother_slaughter": 50,
+            "use_grass_and_residues_for_dairy": True,
+            "tons_to_kcals": 3455000.0,
+            "keep_dairy": 0
+        }
+
+
         feed_dairy_meat_results = (
-            coa.calculate_feed_and_animals_using_baseline_feed_usage(
-                reduction_in_beef_calves=90,
-                reduction_in_dairy_calves=reduction_in_dairy_calves,
-                reduction_in_pig_breeding=90,
-                reduction_in_poultry_breeding=90,
-                increase_in_slaughter=110,
-                months=constants_inputs["NMONTHS"],
-                discount_rate=30,
-                mother_slaughter=0,
-                use_grass_and_residues_for_dairy=use_grass_and_residues_for_dairy,
-                baseline_kcals_per_month_feed=feed_per_month_baseline,
+            coa.calculate_feed_and_animals(input_dict
             )
         )
 
