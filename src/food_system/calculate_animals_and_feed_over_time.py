@@ -47,15 +47,18 @@ class CalculateAnimalOutputs:
             country_feed_caloric_annual + country_feed_fat_annual + country_feed_protein_annual
         )
 
+        # Fractional values of feed type, 
+        fractional_caloric = country_feed_caloric_annual / country_total_feed_tonnes_annual
+        fractional_fat = country_feed_fat_annual / country_total_feed_tonnes_annual
+        fractional_protein = country_feed_protein_annual / country_total_feed_tonnes_annual
+
+        # Monthly values, not all are used, can remove the calroic, protein, and fat.
+        # instead of these monthly values, the function uses the fractional values above to calculate the country_specific_feed_per_animal_head_pm
         country_feed_caloric_monthly = country_feed_caloric_annual / 12
         country_feed_fat_monthly = country_feed_fat_annual / 12
         country_feed_protein_monthly = country_feed_protein_annual / 12
         country_total_feed_tonnes_monthly = country_total_feed_tonnes_annual / 12
 
-        # Fractional values
-        fractional_caloric = country_feed_caloric_annual / country_total_feed_tonnes_annual
-        fractional_fat = country_feed_fat_annual / country_total_feed_tonnes_annual
-        fractional_protein = country_feed_protein_annual / country_total_feed_tonnes_annual
 
         # Feed per animal per month calculated from bottom up assortment of papers in roam
         # this is not the actual feed used, rather the feed requirements (and the requirements could be met from other means such as foraging/grazing non-feed food sources)
@@ -71,7 +74,7 @@ class CalculateAnimalOutputs:
         large_ratio = large_animal_feed_pm_per_animal / small_animals_feed_pm_per_animal
         dairy_ratio = dairy_feed_pm_per_cow / small_animals_feed_pm_per_animal
 
-        # weighted feed per animal per month
+        # weighted feed per animal per month (bottom up)
         weighted_small_animal_feed = small_animals_feed_pm_per_animal * small_animals
         weighted_medium_animal_feed = medium_animal_feed_pm_per_animal * medium_animals
         weighted_large_animal_feed = large_animal_feed_pm_per_animal * large_animals
@@ -89,7 +92,7 @@ class CalculateAnimalOutputs:
         fractional_large_animal_feed = weighted_large_animal_feed / weighted_total_feed
         fractional_dairy_feed = weighted_dairy_feed / weighted_total_feed
 
-        # feed per species per month country specific
+        # feed per species per month country specific (not a per animal basis, it's a per species basis)
         monthly_feed_consumption_small_animals = (
             country_total_feed_tonnes_monthly * fractional_small_animal_feed
         )
@@ -103,8 +106,9 @@ class CalculateAnimalOutputs:
             country_total_feed_tonnes_monthly * fractional_dairy_feed
         )
 
-        # feed per animal per month country specific. This is technically the same value as the feed per animal per month calculated from the bottom up,
+        # feed per *animal* per month country specific. This is technically the same value as the feed per animal per month calculated from the bottom up,
         # but it instead uses those ratios to calaculate the feed, and then uses the country-specific animal feed usage to estimate the actual feed used.
+        # this is a combination of the bottom up and top down approach
         country_specific_feed_per_small_animal_head_pm = (
             monthly_feed_consumption_small_animals / small_animals
         )
@@ -118,7 +122,7 @@ class CalculateAnimalOutputs:
             monthly_feed_consumption_dairy_cows / dairy_cows
         )
 
-        # create dict from the above
+        # create dict from the above, also use the fractional values to calculate the caloric, fat, and protein values
         country_specific_feed_per_animal_head_pm = {
             "small_animals": country_specific_feed_per_small_animal_head_pm,
             "medium_animals": country_specific_feed_per_medium_animal_head_pm,
